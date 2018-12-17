@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll11"
+        android:layout_marginTop="30dp"
+        android:weightSum="9"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_weight="7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/res_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginLeft="6.6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/res_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:fontFamily="@font/nunito_semibold"
+                android:textColor="#555555"
+                android:textSize="17dp"
+                android:layout_marginLeft="14dp"/>
+
+            <TextView
+                android:id="@+id/res_cat"
+                android:fontFamily="@font/nunito_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:textSize="12.5dp"
+                android:layout_marginLeft="14dp"/>
+
+            <View
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:background="#e0e0e0"/>
+
+            <LinearLayout
+                android:gravity="end"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:fontFamily="@font/nunito_light"
+                    android:id="@+id/res_loc"
+                    android:layout_gravity="center"
+                    android:textSize="12dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="main_location"/>
+
+                <TextView
+                    android:id="@+id/res_open"
+                    android:layout_gravity="center"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/nunito_light"                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="open_time"/>
+
+                <TextView
+                    android:id="@+id/res_close"
+                    android:layout_gravity="center"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/nunito_light"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="close_time"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/ll11"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#e0e0e0"/>
+
+</RelativeLayout>

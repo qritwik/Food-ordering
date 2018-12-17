@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_cart"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+
+        android:orientation="horizontal">
+
+
+            <ImageView
+
+                android:layout_marginLeft="14dp"
+                android:id="@+id/vegnon_cart"
+                android:layout_gravity="center_vertical"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/veg"/>
+
+        <TextView
+            android:gravity="left"
+
+            android:layout_marginLeft="14dp"
+
+            android:id="@+id/title_cart"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/nunito"
+            android:text="Makai Ka Shorba"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#424242" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="90dp"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:weightSum="5"
+            android:background="@drawable/round_cart"
+
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_minus_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/nunito_black"
+                android:gravity="start"
+                android:paddingLeft="15dp"
+                android:text="-"
+                android:textColor="#689f38"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/no_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nunito_black"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#689f38"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_plus_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nunito_black"
+                android:gravity="right"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:text="+"
+                android:textColor="#689f38"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <TextView
+
+            android:layout_marginRight="14dp"
+
+
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:id="@+id/price_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semibold"
+
+            android:text="@string/cart_row"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#424242" />
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_below="@id/ll_cart"
+
+        android:layout_marginTop="10dp"
+        android:id="@+id/line5"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+
+        android:background="#e0e0e0"/>
+
+
+</RelativeLayout>
