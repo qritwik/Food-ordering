@@ -2,27 +2,114 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_home"
+    <RelativeLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#eceff1"
-        android:elevation="4dp"
-        app:title="Hunger Mela"
-        app:titleTextColor="#263238"></android.support.v7.widget.Toolbar>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/toolbar_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/carter_one"
+            android:text="Hunger Mela"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22dp"></TextView>
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:layout_below="@id/toolbar_home"
+        android:background="#90a4ae"/>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/burger"
+            android:id="@+id/leftye"
+            android:layout_below="@id/line1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"/>
+
+
+        <TextView
+
+            android:layout_toRightOf="@id/leftye"
+            android:id="@+id/explore_cate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="Popular Categories"
+            android:textColor="#212121"
+            android:textSize="20dp"></TextView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_home_cate"
+        android:layout_below="@id/explore_cate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+
+        <ImageView
+            android:src="@drawable/store"
+            android:id="@+id/leftye1"
+            android:layout_below="@id/rv_home_cate"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="40dp"/>
+
+
+        <TextView
+            android:layout_toRightOf="@id/leftye1"
+            android:id="@+id/explore_rest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_home_cate"
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="Explore Resturants"
+            android:textColor="#212121"
+            android:textSize="20dp"></TextView>
+
+
 
 
 
 
     <android.support.v7.widget.RecyclerView
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+
         android:id="@+id/rv_res_name"
-        android:layout_marginTop="2dp"
-        android:layout_below="@id/toolbar_home"
+        android:layout_below="@id/explore_rest"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
@@ -52,6 +139,14 @@
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

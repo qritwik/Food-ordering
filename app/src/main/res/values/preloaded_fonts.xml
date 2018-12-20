@@ -3,9 +3,13 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/abhaya_libre_semibold</item>
         <item>@font/allerta</item>
+        <item>@font/archivo_black</item>
         <item>@font/asul</item>
         <item>@font/baumans</item>
+        <item>@font/berkshire_swash</item>
         <item>@font/bungee_inline</item>
+        <item>@font/carter_one</item>
+        <item>@font/kaushan_script</item>
         <item>@font/nunito</item>
         <item>@font/nunito_black</item>
         <item>@font/nunito_bold</item>

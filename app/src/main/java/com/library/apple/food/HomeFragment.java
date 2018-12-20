@@ -20,17 +20,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
@@ -52,38 +56,66 @@ public class HomeFragment extends Fragment {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     private List<Res> resList;
+    private List<Category> cateList;
 
     String auth_token;
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
-    private String res_url = "http://www.hungermela.com/api/v1/restaurants/";
+    private String res_url = "https://www.hungermela.com/api/v1/restaurants/";
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+    RecyclerView recyclerView_cat;
+    RecyclerView.Adapter adapter_cat;
 
-    }
+    ImageView burger12,snack12;
+    TextView explore_cate12,explore_rest12;
+
+//    public HomeFragment() {
+//        // Required empty public constructor
+//    }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setHasOptionsMenu(true);
+
+ //   }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_home,container,false);
 
-
         mShimmerViewContainer = myView.findViewById(R.id.shimmer_view_container);
-
         mShimmerViewContainer.startShimmerAnimation();
 
+        burger12 = (ImageView)myView.findViewById(R.id.leftye);
+        snack12 = (ImageView)myView.findViewById(R.id.leftye1);
+        explore_cate12 = (TextView)myView.findViewById(R.id.explore_cate);
+        explore_rest12 = (TextView)myView.findViewById(R.id.explore_rest);
 
-        Toolbar toolbar = (Toolbar)myView.findViewById(R.id.toolbar_home);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+
+        burger12.setVisibility(View.GONE);
+        snack12.setVisibility(View.GONE);
+        explore_cate12.setVisibility(View.GONE);
+        explore_rest12.setVisibility(View.GONE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        Toolbar toolbar = (Toolbar)myView.findViewById(R.id.toolbar_home);
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.setSupportActionBar(toolbar);
 
         auth_token = getActivity().getIntent().getStringExtra("token");
 
@@ -100,11 +132,77 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
 
+
+        cateList = new ArrayList<>();
+
+        recyclerView_cat = (RecyclerView)myView.findViewById(R.id.rv_home_cate);
+        adapter_cat = new categoryAdapter(getActivity(),cateList);
+
+        recyclerView_cat.setAdapter(adapter_cat);
+
+        recyclerView_cat.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerView_cat.setVisibility(View.GONE);
+
+
+        cateData();
+
         getData();
 
 
 
+
         return myView;
+
+    }
+
+
+    private void cateData(){
+
+        String cate_url = "https://www.hungermela.com/api/v1/categories/";
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        JsonArrayRequest jsonArrayRequest1 = new JsonArrayRequest(cate_url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                for(int i = 0; i < response.length(); i++){
+
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        Category category = new Category();
+
+                        category.setCate_id(jsonObject.getString("id"));
+                        category.setCate_name(jsonObject.getString("name"));
+                        category.setCate_picture(jsonObject.getString("picture"));
+
+                        cateList.add(category);
+
+
+                        adapter_cat.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        queue.add(jsonArrayRequest1);
+
+
+
 
     }
 
@@ -127,9 +225,7 @@ public class HomeFragment extends Fragment {
 
                         res.setRes_phone_number(jsonObject.getString("phone_number"));
                         res.setRes_line_1(jsonObject.getString("line_1"));
-                        res.setRes_line_2(jsonObject.getString("line_2"));
                         res.setRes_city(jsonObject.getString("mainlocation"));
-                        res.setRes_state(jsonObject.getString("state"));
                         res.setRes_zip_code(jsonObject.getString("zip_code"));
                         res.setRes_chain(jsonObject.getString("chain"));
                         res.setRes_part_of(jsonObject.getString("part_of"));
@@ -142,7 +238,7 @@ public class HomeFragment extends Fragment {
 
                         //Json object request for category
 
-                        String cat_url = "http://www.hungermela.com/api/v1/categories/"+cat1;
+                        String cat_url = "https://www.hungermela.com/api/v1/categories/"+cat1;
 
 
                         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -173,6 +269,12 @@ public class HomeFragment extends Fragment {
 
                             }
                         });
+
+                        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                                30000,
+                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
                         MySingleton1.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
 
@@ -212,6 +314,16 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
+                burger12.setVisibility(View.VISIBLE);
+                snack12.setVisibility(View.VISIBLE);
+                explore_cate12.setVisibility(View.VISIBLE);
+                explore_rest12.setVisibility(View.VISIBLE);
+
+                recyclerView_cat.setVisibility(View.VISIBLE);
+
+
+
+
                 mShimmerViewContainer.stopShimmerAnimation();
                 mShimmerViewContainer.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
@@ -226,6 +338,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         MySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
 
     }
@@ -233,35 +350,35 @@ public class HomeFragment extends Fragment {
 
 
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_offers) {
-
-
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken", Context.MODE_PRIVATE);
-            String name = sharedPreferences.getString("id","error");
-            Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.main, menu);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_offers) {
+//
+//
+//            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken", Context.MODE_PRIVATE);
+//            String name = sharedPreferences.getString("id","error");
+//            Toast.makeText(getActivity(),name,Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
 }

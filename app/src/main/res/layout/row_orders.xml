@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/ll123"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/res_suc" />
+
+        <TextView
+            android:id="@+id/res_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito_light"
+            android:text="The Bowl Company"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito_light"
+            android:gravity="right"
+            android:text="@string/price"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="15dp"
+        android:id="@+id/line5"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:layout_below="@id/ll123"
+        android:background="#e0e0e0"/>
+
+</RelativeLayout>

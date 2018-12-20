@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <RelativeLayout
+        android:id="@+id/rl123"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <TextView
 
         android:id="@+id/toolbar_account"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="16dp"
-        android:background="#fafafa"
         android:fontFamily="@font/nunito_semibold"
         android:text="RITWIK RAJ"
         android:textColor="#424242"
@@ -84,132 +86,177 @@
         android:background="#e0e0e0"/>
 
 
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line8"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="35dp"
-            android:fontFamily="@font/nunito_light"
-            android:hint="RITWIK RAJ"
-            android:textSize="14dp" />
+        <!--<EditText-->
+            <!--android:id="@+id/name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/line8"-->
+            <!--android:layout_marginLeft="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:layout_marginTop="35dp"-->
+            <!--android:fontFamily="@font/nunito_light"-->
+            <!--android:hint="RITWIK RAJ"-->
+            <!--android:textSize="14dp" />-->
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/name"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/nunito_light"
-        android:hint="qritwik@gmail.com"
-        android:textSize="14dp" />
+    <!--<EditText-->
+        <!--android:id="@+id/email"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/name"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_marginRight="14dp"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:fontFamily="@font/nunito_light"-->
+        <!--android:hint="qritwik@gmail.com"-->
+        <!--android:textSize="14dp" />-->
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/email"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/nunito_light"
-        android:hint="8709996580"
-        android:textSize="14dp" />
-
-
-    <TextView
-        android:id="@+id/editde"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/phone"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="EDIT DETAILS"
-        android:textColor="@color/colorAccent"
-
-        android:textSize="15dp"
-        android:textStyle="bold" />
+    <!--<EditText-->
+        <!--android:id="@+id/phone"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/email"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_marginRight="14dp"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:fontFamily="@font/nunito_light"-->
+        <!--android:hint="8709996580"-->
+        <!--android:textSize="14dp" />-->
 
 
-    <View
-        android:layout_marginTop="25dp"
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@id/editde"
-        android:background="#e0e0e0"/>
+    <!--<TextView-->
+        <!--android:id="@+id/editde"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@id/phone"-->
+        <!--android:layout_marginRight="14dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:fontFamily="@font/nunito_bold"-->
+        <!--android:text="EDIT DETAILS"-->
+        <!--android:textColor="@color/colorAccent"-->
 
-        <TextView
-            android:id="@+id/editde2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line2"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="ADD NEW ADDRESS"
+        <!--android:textSize="15dp"-->
+        <!--android:textStyle="bold" />-->
 
-            android:textColor="#424242"
-            android:textSize="15dp"
-            android:textStyle="normal" />
 
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editde2"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="2dp"
-        android:textSize="14dp"
-        android:fontFamily="@font/nunito_light" />
+    <!--<View-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:id="@+id/line2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_below="@id/editde"-->
+        <!--android:background="#e0e0e0"/>-->
 
-    <TextView
-        android:id="@+id/editde3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/address"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="ADD ADDRESS"
-        android:textColor="@color/colorAccent"
+        <!--<TextView-->
+            <!--android:id="@+id/editde2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/line2"-->
+            <!--android:layout_marginLeft="14dp"-->
+            <!--android:layout_marginTop="25dp"-->
+            <!--android:fontFamily="@font/nunito_bold"-->
+            <!--android:text="ADD NEW ADDRESS"-->
 
-        android:textSize="15dp"
-        android:textStyle="normal" />
+            <!--android:textColor="#424242"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textStyle="normal" />-->
 
-    <View
-        android:layout_marginTop="15dp"
-        android:id="@+id/line3"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@id/editde3"
-        android:background="#e0e0e0"/>
+    <!--<EditText-->
+        <!--android:id="@+id/address"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/editde2"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_marginRight="14dp"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:textSize="14dp"-->
+        <!--android:fontFamily="@font/nunito_light" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/editde3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@id/address"-->
+        <!--android:layout_marginRight="14dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:fontFamily="@font/nunito_bold"-->
+        <!--android:text="ADD ADDRESS"-->
+        <!--android:textColor="@color/colorAccent"-->
+
+        <!--android:textSize="15dp"-->
+        <!--android:textStyle="normal" />-->
+
+    <!--<View-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:id="@+id/line3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_below="@id/editde3"-->
+        <!--android:background="#e0e0e0"/>-->
 
         <Button
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/line3"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="14dp"
-            android:layout_marginTop="20dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/nunito_bold"
             android:text="Logout"
             android:textColor="@android:color/black"
             android:theme="@style/AlertDialog.AppCompat.Light" />
 
+
+        <LinearLayout
+            android:id="@+id/tcvb"
+            android:layout_marginTop="40dp"
+
+            android:background="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/line8">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+
+
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="PREVIOUS ORDERS"
+                    android:textColor="#212121"
+                    android:textSize="16dp" />
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv1234"
+            android:layout_below="@id/tcvb"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
     </RelativeLayout>
 
 
-</ScrollView>
+
+</android.support.v4.widget.NestedScrollView>

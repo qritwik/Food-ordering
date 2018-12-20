@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#ffffff"
+
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/ll_cart"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-
+        android:layout_height="45dp"
         android:orientation="horizontal">
 
 
             <ImageView
-
-                android:layout_marginLeft="14dp"
+                android:layout_marginLeft="10dp"
                 android:id="@+id/vegnon_cart"
                 android:layout_gravity="center_vertical"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:src="@drawable/veg"/>
 
         <TextView
-            android:gravity="left"
-
-            android:layout_marginLeft="14dp"
-
             android:id="@+id/title_cart"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/nunito"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/nunito_light"
+            android:gravity="left"
             android:text="Makai Ka Shorba"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#424242" />
+            android:textColor="#424242"
+            android:textSize="11sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,7 +61,8 @@
                 android:gravity="start"
                 android:paddingLeft="15dp"
                 android:text="-"
-                android:textColor="#689f38"
+                android:textColor="#616161"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -75,6 +74,7 @@
                 android:gravity="center"
                 android:text="2"
                 android:textColor="#689f38"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,27 +88,29 @@
                 android:paddingRight="10dp"
                 android:text="+"
                 android:textColor="#689f38"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
 
-        <TextView
+            <TextView
 
-            android:layout_marginRight="14dp"
+                android:id="@+id/price_cart"
 
 
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:id="@+id/price_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:fontFamily="@font/nunito_light"
+                android:gravity="center"
 
-            android:text="@string/cart_row"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#424242" />
+                android:text="@string/cart_row"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#424242"
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -121,7 +123,7 @@
     <View
         android:layout_below="@id/ll_cart"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/line5"
         android:layout_width="match_parent"
         android:layout_height="0.4dp"

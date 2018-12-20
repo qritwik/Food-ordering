@@ -13,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -34,7 +36,7 @@ public class ScrollingActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     private List<Item> itemList;
-    private String item_url = "http://www.hungermela.com/api/v1/restaurants/";
+    private String item_url = "https://www.hungermela.com/api/v1/restaurants/";
     String res_id;
     int flag=0;
     String auth_token;
@@ -48,9 +50,9 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab_cart1);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +64,7 @@ public class ScrollingActivity extends AppCompatActivity {
             }
         });
 
-        image_res = (ImageView)findViewById(R.id.image_res1);
+//        image_res = (ImageView)findViewById(R.id.image_res1);
 
 
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container123);
@@ -71,17 +73,19 @@ public class ScrollingActivity extends AppCompatActivity {
 
         auth_token = getIntent().getStringExtra("auth_token");
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+//        View decorView = getWindow().getDecorView();
+//        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(uiOptions);
+
+        TextView explore_rest_name = (TextView)findViewById(R.id.explore_rest_name);
 
         res_id = getIntent().getStringExtra("res_id");
 
         String res_name = getIntent().getStringExtra("res_name");
-        toolbar.setTitle(res_name);
 
-        String res_image = getIntent().getStringExtra("res_image");
-        Glide.with(getApplicationContext()).load(res_image).into(image_res);
+        explore_rest_name.setText(res_name);
+//        String res_image = getIntent().getStringExtra("res_image");
+//        Glide.with(getApplicationContext()).load(res_image).into(image_res);
 
 
         itemList = new ArrayList<>();
@@ -169,8 +173,17 @@ public class ScrollingActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("Volley", error.toString());
 
+                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+
+
             }
         });
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
         MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
 

@@ -1,6 +1,7 @@
 package com.library.apple.food;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class CartFragment extends Fragment {
     Button btn_proceed;
 
     String auth_token;
-    private String cart_url = "http://www.hungermela.com/api/v1/cart/";
+    private String cart_url = "https://www.hungermela.com/api/v1/cart/";
 
     TextView cart_res_name,cart_item_price,cart_tot_price,cart_del_price;
 
@@ -103,7 +104,11 @@ public class CartFragment extends Fragment {
         btn_proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Order Placed",Toast.LENGTH_LONG).show();
+
+                String coup = et_coupon.getText().toString().trim();
+                checkOut(coup);
+
+//
             }
         });
 
@@ -194,9 +199,86 @@ public class CartFragment extends Fragment {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+    private void checkOut(final String coupoun){
+
+        String checkout_url = "https://www.hungermela.com/api/v1/checkout/";
+
+        RequestQueue queue2 = Volley.newRequestQueue(getActivity());
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, checkout_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        try {
+                            JSONObject js = new JSONObject(response);
+
+                            Intent intent = new Intent(getActivity(),success.class);
+                            startActivity(intent);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+//                        params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", "Token "+auth_token);
+                return params;
+            }
+
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("code", coupoun);
+                return params;
+            }
+        };
+        queue2.add(postRequest);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
     private void applyCoupon(final String coupoun){
 
-        String coupon_url = "http://www.hungermela.com/api/v1/final-price/";
+        String coupon_url = "https://www.hungermela.com/api/v1/final-price/";
 
         RequestQueue queue2 = Volley.newRequestQueue(getActivity());
 
@@ -282,7 +364,7 @@ public class CartFragment extends Fragment {
 
         RequestQueue queue1 = Volley.newRequestQueue(getActivity());
 
-        String url_final = "http://www.hungermela.com/api/v1/final-price/";
+        String url_final = "https://www.hungermela.com/api/v1/final-price/";
         JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.GET, url_final, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -343,7 +425,7 @@ public class CartFragment extends Fragment {
 
     private void empty_cart(final View view){
 
-        String url_empty = "http://www.hungermela.com/api/v1/empty-cart/";
+        String url_empty = "https://www.hungermela.com/api/v1/empty-cart/";
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url_empty,

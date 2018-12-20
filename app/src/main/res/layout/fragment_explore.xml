@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools">
 
@@ -14,9 +16,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/nunito_bold"
+        android:fontFamily="@font/nunito_black"
         android:text="Explore for resturants"
-        android:textColor="#555555"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -63,15 +65,14 @@
         android:layout_alignTop="@+id/editText"
         android:layout_marginEnd="20dp"
         android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_dark"
+        app:backgroundTint="@color/colorPrimary"
         app:elevation="0dp"
         app:srcCompat="@drawable/ic_search_black_24dp" />
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+
         android:id="@+id/search_list"
 
         android:layout_width="match_parent"

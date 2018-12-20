@@ -11,7 +11,15 @@
 
     <string name="price">\u20B9 %1$s</string>
 
+    <string name="open_at">Opens at %1$s AM</string>
+
     <string name="dis_price">- \u20B9 %1$s</string>
+
+    <string name="order_id">ORDER #%1$s</string>
+
+    <string name="success_subtitle">Successfull  |  \u20B9 %1$s</string>
+
+    <string name="success_subtitle_new">Order Summary  |  \u20B9 %1$s</string>
 
 
     <string name="price_dis">- \u20B9 0</string>
@@ -19,7 +27,6 @@
     <string name="proceed_to_pay">PROCEED TO PAY: \u20B9 %1$s</string>
 
     <string name="price1">%1$s Items, To pay \u20B9 %2$s</string>
-
 
 
     <string name="title_activity_login">Sign in</string>

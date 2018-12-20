@@ -9,20 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
+public class ResAdapter1 extends RecyclerView.Adapter<ResAdapter1.MyViewHolder> {
 
     private Context context;
-    private List<Res> list;
+    private List<Res1> list;
     private String auth_token;
 
-    public ResAdapter(Context context, List<Res> list, String auth_token){
+    public ResAdapter1(Context context, List<Res1> list, String auth_token){
         this.context = context;
         this.list = list;
         this.auth_token = auth_token;
@@ -40,18 +38,18 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
 
-        final Res res = list.get(i);
+        final Res1 res = list.get(i);
 
-        viewHolder.res_name.setText(res.getRes_name());
-        viewHolder.res_cat.setText(res.getRes_cat());
+        viewHolder.res_name.setText(res.getRes_name_c());
+        viewHolder.res_cat.setText(res.getRes_cat_c());
 
 
-        String open_at = context.getString(R.string.open_at,res.getRes_open());
+        String open_at = context.getString(R.string.open_at,res.getRes_open_c());
 //        viewHolder.res_loc.setText(res.getRes_loc());
         viewHolder.res_open.setText(open_at);
 //        viewHolder.res_close.setText(res.getRes_close());
 
-        Glide.with(context).load(res.getRes_image()).into(viewHolder.res_image);
+        Glide.with(context).load(res.getRes_image_c()).into(viewHolder.res_image);
 
 
     }
@@ -70,14 +68,14 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
 
 
         TextView res_name,res_cat,res_open;
-        List<Res> list;
+        List<Res1> list;
         Context context;
         ImageView res_image;
 
 
 
 
-        public MyViewHolder(@NonNull View itemView, List<Res> list,Context context) {
+        public MyViewHolder(@NonNull View itemView, List<Res1> list,Context context) {
             super(itemView);
 
             this.context = context;
@@ -99,13 +97,12 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
         public void onClick(View view) {
 
             int pos = getAdapterPosition();
-            Res res = this.list.get(pos);
+            Res1 res = this.list.get(pos);
 
             Intent intent = new Intent(this.context,ScrollingActivity.class);
-            intent.putExtra("res_id",res.getRes_id());
-            intent.putExtra("res_name",res.getRes_name());
+            intent.putExtra("res_name",res.getRes_name_c());
             intent.putExtra("auth_token",auth_token);
-            intent.putExtra("res_image",res.getRes_image());
+            intent.putExtra("res_image",res.getRes_image_c());
             this.context.startActivity(intent);
 
         }

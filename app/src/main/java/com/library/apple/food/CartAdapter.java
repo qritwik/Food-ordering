@@ -78,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             @Override
             public void onClick(final View view) {
 
-                String url_plus = "http://www.hungermela.com/api/v1/change-quantity/";
+                String url_plus = "https://www.hungermela.com/api/v1/change-quantity/";
                 final String item_id = item.getCart_item_id();
 
 
@@ -162,7 +162,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
 
-                    String url_minus = "http://www.hungermela.com/api/v1/delete-item/";
+                    String url_minus = "https://www.hungermela.com/api/v1/delete-item/";
                     final String item_id = item.getCart_item_id();
 
 
@@ -233,7 +233,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 else if(quantity > 1){
 
 
-                    String url_minus = "http://www.hungermela.com/api/v1/change-quantity/";
+                    String url_minus = "https://www.hungermela.com/api/v1/change-quantity/";
                     final String item_id = item.getCart_item_id();
 
 

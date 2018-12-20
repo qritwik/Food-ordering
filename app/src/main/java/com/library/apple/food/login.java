@@ -64,11 +64,12 @@ public class login extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
 
-                String url = "http://www.hungermela.com/api/v1/login/";
+                String url = "https://www.hungermela.com/api/v1/login/";
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+
                                 // response
                                 Log.d("Response", response);
                                 try {
@@ -78,7 +79,7 @@ public class login extends AppCompatActivity {
                                     JSONObject user = jsonObject.getJSONObject("user");
                                     String id = user.getString("id");
                                     String last_login = user.getString("last_login");
-                                    String username = user.getString("username");
+                                    String name = user.getString("name");
                                     String first_name = user.getString("first_name");
                                     String last_name = user.getString("last_name");
                                     String email = user.getString("email");
@@ -90,7 +91,7 @@ public class login extends AppCompatActivity {
                                     editor.putString("token",jsonObject.getString("token"));
                                     editor.putString("id",id);
                                     editor.putString("last_login",last_login);
-                                    editor.putString("username",username);
+                                    editor.putString("name",name);
                                     editor.putString("first_name",first_name);
                                     editor.putString("last_name",last_name);
                                     editor.putString("email",email);
@@ -116,6 +117,7 @@ public class login extends AppCompatActivity {
                             }
                         }
                 ) {
+
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();

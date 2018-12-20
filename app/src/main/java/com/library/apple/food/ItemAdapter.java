@@ -1,17 +1,23 @@
 package com.library.apple.food;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +41,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     private List<Item> list;
     private String auth_token;
 
+    String auth_token1;
+
     public ItemAdapter(Context context, List<Item> list, String auth_token) {
         this.context = context;
         this.list = list;
@@ -54,6 +62,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
 
+
+        SharedPreferences sharedPreferences = this.context.getSharedPreferences("loginToken",Context.MODE_PRIVATE);
+        auth_token1 = sharedPreferences.getString("token","error");
+
         final Item item = list.get(i);
 
         viewHolder.item_name.setText(item.getItem_name());
@@ -68,9 +80,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             viewHolder.item_veg.setImageResource(R.drawable.non_veg);
         }
 
-        Glide.with(context).load(item.getItem_picture()).into(viewHolder.item_picture);
+
 
         viewHolder.item_fab.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(final View view) {
                 final String pk = item.getItem_id();
@@ -79,7 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 RequestQueue queue = Volley.newRequestQueue(context);
 
 
-                String url = "http://www.hungermela.com/api/v1/add-item/";
+                String url = "https://www.hungermela.com/api/v1/add-item/";
                 StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
@@ -93,6 +106,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                             public void onErrorResponse(VolleyError error) {
                                 // error
                                 Log.d("Error.Response", error.toString());
+                                Toast.makeText(context,error.toString(),Toast.LENGTH_LONG).show();
                             }
                         }
                 ) {
@@ -102,7 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
 //                        params.put("Content-Type", "application/json; charset=UTF-8");
-                        params.put("Authorization", "Token "+auth_token);
+                        params.put("Authorization", "Token "+auth_token1);
                         return params;
                     }
 
@@ -120,24 +134,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
 
                 final Snackbar snackBar = Snackbar.make(view,item.getItem_name()+" added to cart" , Snackbar.LENGTH_INDEFINITE);
+                View sbView = snackBar.getView();
+                sbView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
 
-                snackBar.setAction("GO TO CART", new View.OnClickListener() {
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+
+                snackBar.setAction("CART", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        Fragment myFragment = new CartFragment();
-
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
-
-
-
-
-
+                        Toast.makeText(
+                                context,
+                                "snackbar OK clicked",
+                                Toast.LENGTH_LONG).show();
                     }
                 });
+
+
                 snackBar.show();
+
 
 
 
@@ -164,21 +179,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView item_picture, item_veg;
+        ImageView item_veg;
         TextView item_name, item_cuisine_name, item_price;
-        FloatingActionButton item_fab;
+        Button item_fab;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            item_picture = (ImageView) itemView.findViewById(R.id.item_picture);
+//            item_picture = (ImageView) itemView.findViewById(R.id.item_picture);
             item_veg = (ImageView) itemView.findViewById(R.id.item_veg);
             item_name = (TextView) itemView.findViewById(R.id.item_name);
             item_cuisine_name = (TextView) itemView.findViewById(R.id.item_cuisine_name);
             item_price = (TextView) itemView.findViewById(R.id.item_price);
 
-            item_fab = (FloatingActionButton) itemView.findViewById(R.id.item_fab);
+            item_fab = (Button) itemView.findViewById(R.id.item_fab);
 
 
         }

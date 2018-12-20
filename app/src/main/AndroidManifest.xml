@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login"
+        <activity
+            android:name=".login"
             android:theme="@style/login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,8 +34,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".fianl" />
+        <activity android:name=".success" />
+        <activity android:name=".orderSummary" />
+        <activity android:name=".CategoryRes"></activity>
     </application>
 
 </manifest>

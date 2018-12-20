@@ -1,117 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_marginTop="0.1dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:background="#fafafa"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll11"
-        android:layout_marginTop="30dp"
-        android:weightSum="9"
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll11"-->
+        <!--android:weightSum="9"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_weight="7"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<ImageView-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:id="@+id/res_image"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_marginRight="@dimen/activityPadding"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="@dimen/padding_10"-->
+                <!--/>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_weight="2"-->
+            <!--android:layout_marginLeft="6.6dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/res_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Name"-->
+                <!--android:fontFamily="@font/nunito_semibold"-->
+                <!--android:textColor="#555555"-->
+                <!--android:textSize="17dp"-->
+                <!--android:layout_marginLeft="16dp"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/res_cat"-->
+                <!--android:fontFamily="@font/nunito_light"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Category"-->
+                <!--android:textSize="12.5dp"-->
+                <!--android:layout_marginLeft="16dp"/>-->
+
+            <!--<View-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.3dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="14dp"-->
+                <!--android:background="#e0e0e0"/>-->
+
+            <!--<LinearLayout-->
+                <!--android:gravity="end"-->
+                <!--android:weightSum="3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="14dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<TextView-->
+                    <!--android:fontFamily="@font/nunito_light"-->
+                    <!--android:id="@+id/res_loc"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textSize="12dp"-->
+                    <!--android:gravity="left"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="main_location"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/res_open"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textSize="12dp"-->
+                    <!--android:fontFamily="@font/nunito_light"                    android:gravity="center"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="open_time"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/res_close"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:textSize="12dp"-->
+                    <!--android:fontFamily="@font/nunito_light"-->
+                    <!--android:gravity="right"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="close_time"/>-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+        <!--android:layout_below="@id/ll11"-->
+        <!--android:layout_marginTop="6dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.1dp"-->
+        <!--android:background="#d2dade"/>-->
+
+
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
 
-        <LinearLayout
-            android:layout_weight="7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ImageView
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/res_image"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/round_i"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/pizza" />
 
-            <ImageView
-                android:id="@+id/res_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                 />
+        <TextView
+            android:layout_marginTop="16dp"
 
-        </LinearLayout>
+            android:id="@+id/res_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toEndOf="@+id/res_image"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Rolls Corner"
+            android:textColor="#212121"
+            android:textSize="15sp" />
 
-        <LinearLayout
-            android:layout_weight="2"
-            android:layout_marginLeft="6.6dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/res_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_name"
+            android:layout_marginLeft="15dp"
 
-            <TextView
-                android:id="@+id/res_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:fontFamily="@font/nunito_semibold"
-                android:textColor="#555555"
-                android:textSize="17dp"
-                android:layout_marginLeft="14dp"/>
+            android:layout_toEndOf="@+id/res_image"
+            android:fontFamily="@font/nunito"
+            android:text="Rolls, Fast Food"
+            android:textSize="11.5sp" />
 
-            <TextView
-                android:id="@+id/res_cat"
-                android:fontFamily="@font/nunito_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category"
-                android:textSize="12.5dp"
-                android:layout_marginLeft="14dp"/>
+        <TextView
+            android:id="@+id/res_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_cat"
+            android:layout_marginLeft="15dp"
 
-            <View
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="0.3dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
-                android:background="#e0e0e0"/>
+            android:layout_toEndOf="@+id/res_image"
+            android:fontFamily="@font/nunito"
+            android:text="Opens at 12PM"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="10sp" />
 
-            <LinearLayout
-                android:gravity="end"
-                android:weightSum="3"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="14dp"
-                android:orientation="horizontal"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:fontFamily="@font/nunito_light"
-                    android:id="@+id/res_loc"
-                    android:layout_gravity="center"
-                    android:textSize="12dp"
-                    android:gravity="left"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="main_location"/>
-
-                <TextView
-                    android:id="@+id/res_open"
-                    android:layout_gravity="center"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/nunito_light"                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="open_time"/>
-
-                <TextView
-                    android:id="@+id/res_close"
-                    android:layout_gravity="center"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/nunito_light"
-                    android:gravity="right"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="close_time"/>
-            </LinearLayout>
-
-        </LinearLayout>
+    </RelativeLayout>
 
 
-    </LinearLayout>
-
-    <View
-        android:layout_below="@id/ll11"
-        android:layout_marginTop="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#e0e0e0"/>
-
-</RelativeLayout>
+</android.support.design.card.MaterialCardView>

@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -63,7 +64,7 @@ public class ExploreFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     private List<Res> resList;
 
-    private String res_url = "http://www.hungermela.com/api/v1/restaurants/";
+    private String res_url = "https://www.hungermela.com/api/v1/restaurants/";
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
@@ -163,9 +164,7 @@ public class ExploreFragment extends Fragment {
                         res.setRes_id(jsonObject.getString("id"));
                         res.setRes_phone_number(jsonObject.getString("phone_number"));
                         res.setRes_line_1(jsonObject.getString("line_1"));
-                        res.setRes_line_2(jsonObject.getString("line_2"));
                         res.setRes_city(jsonObject.getString("city"));
-                        res.setRes_state(jsonObject.getString("state"));
                         res.setRes_zip_code(jsonObject.getString("zip_code"));
                         res.setRes_chain(jsonObject.getString("chain"));
                         res.setRes_part_of(jsonObject.getString("part_of"));
@@ -178,7 +177,7 @@ public class ExploreFragment extends Fragment {
 
                         //Json object request for category
 
-                        String cat_url = "http://www.hungermela.com/api/v1/categories/"+cat1;
+                        String cat_url = "https://www.hungermela.com/api/v1/categories/"+cat1;
 
 
                         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -260,6 +259,12 @@ public class ExploreFragment extends Fragment {
 
             }
         });
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
 
         MySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
 

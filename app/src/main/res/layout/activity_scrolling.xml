@@ -1,66 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ScrollingActivity">
+    android:background="#ffffff">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/app_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/app_bar_height"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:theme="@style/AppTheme">-->
+
+
+
+
+
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:id="@+id/toolbar_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:contentScrim="?attr/colorPrimary"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+            <!--app:toolbarId="@+id/toolbar">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/image_res1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:src="@drawable/pizza"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:layout_height="match_parent" />-->
+
+
+
+
+
+
+
+
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--app:title="MAA DA DHABA"-->
+                <!--app:titleTextColor="#ffffff"-->
+                <!--android:theme="@style/item1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+
+
+
+
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/image_res1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:src="@drawable/pizza"-->
+        <!--android:scaleType="fitXY"/>-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <ImageView
+            android:src="@drawable/popcorn"
+            android:id="@+id/leftye1"
+            android:layout_below="@id/rv_home_cate"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"/>
+
+
+        <TextView
+            android:layout_toRightOf="@id/leftye1"
+            android:id="@+id/explore_rest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_home_cate"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="Explore Resturants"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"></TextView>
+
+
+    <View
+        android:id="@+id/line90"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/item1">
+        android:layout_height="0.4dp"
+        android:layout_below="@id/explore_rest_name"
+        android:background="#90a4ae"/>
 
 
 
+    <!--</android.support.v7.widget.Toolbar>-->
 
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_res"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+
+        android:layout_below="@id/line90"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_below="@id/line90"
+        android:id="@+id/shimmer_view_container123"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <!-- Adding 7 rows of placeholders -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <ImageView
-                android:id="@+id/image_res1"
-                android:layout_width="match_parent"
-                android:src="@drawable/pizza"
-                android:scaleType="fitXY"
-                android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
+            <include layout="@layout/data_placeholder_layout" />
 
 
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-
-
-
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                app:title="MAA DA DHABA"
-                app:titleTextColor="#263238"
-                android:theme="@style/item1"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_cart1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/cart"
+        android:layout_margin="15dp"/>
 
 
 
 
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
-
-    <include
-        layout="@layout/content_scrolling" />
-
-
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
