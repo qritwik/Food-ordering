@@ -67,7 +67,7 @@
         android:background="#ffffff"
         android:id="@+id/rl1"
         android:layout_width="match_parent"
-        android:layout_height="172dp">
+        android:layout_height="158dp">
 
         <LinearLayout
 
@@ -78,13 +78,14 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textSize="13dp"
                     android:id="@+id/et_coupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,7 +118,7 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:id="@+id/line8"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
@@ -127,13 +128,15 @@
 
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -145,6 +148,8 @@
                     android:textColor="#616161" />
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:id="@+id/cart_tot_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,7 +169,7 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:id="@+id/line4"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
@@ -172,13 +177,15 @@
                 android:background="#cfd8dc"/>
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -191,6 +198,8 @@
                      />
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:id="@+id/cart_tot_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,7 +216,7 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:id="@+id/line67"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
@@ -215,13 +224,15 @@
                 android:background="#cfd8dc"/>
 
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -234,6 +245,8 @@
                     />
 
                 <TextView
+                    android:textSize="13dp"
+
                     android:id="@+id/cart_del_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

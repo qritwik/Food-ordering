@@ -66,77 +66,158 @@ public class success extends AppCompatActivity {
     }
 
 
-    private void getData(){
 
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+    private void getData(){
 
         String order_url = "https://www.hungermela.com/api/v1/order/";
 
-        StringRequest postRequest = new StringRequest(Request.Method.GET, order_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                order_url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
 
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for(int i = (jsonArray.length()-1); i > (jsonArray.length()-2); i--){
+                try {
+//                    String total_orders_count = response.getString("count");
+                    JSONArray jsonArray = response.getJSONArray("results");
 
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    for(int i = (jsonArray.length()-1); i > (jsonArray.length()-2); i--){
 
-                                success_order_id = jsonObject.getString("id");
-                                success_address = jsonObject.getString("complete_address");
-                                success_res = jsonObject.getString("restaurant");
-                                success_price = jsonObject.getString("total");
-                                user_name = jsonObject.getString("user_name");
-
-
-
-                                String order_id_new = getString(R.string.order_id,success_order_id);
-                                order_id.setText(order_id_new);
-
-                                String subtitle_new = getString(R.string.success_subtitle,success_price);
-                                success_subtitle.setText(subtitle_new);
-
-                                res_name.setText(success_res);
-
-                                home_name.setText(success_address);
-
-                                String price_new = getString(R.string.price,success_price);
-                                price_item_tot.setText(price_new);
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        success_order_id = jsonObject.getString("id");
+                        success_address = jsonObject.getString("complete_address");
+                        success_res = jsonObject.getString("restaurant");
+                        success_price = jsonObject.getString("total");
+                        user_name = jsonObject.getString("user_name");
 
 
-                            }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        String order_id_new = getString(R.string.order_id,success_order_id);
+                        order_id.setText(order_id_new);
+
+                        String subtitle_new = getString(R.string.success_subtitle,success_price);
+                        success_subtitle.setText(subtitle_new);
+
+                        res_name.setText(success_res);
+
+                        home_name.setText(success_address);
+
+                        String price_new = getString(R.string.price,success_price);
+                        price_item_tot.setText(price_new);
 
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-        ) {
 
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-//                        params.put("Content-Type", "application/json; charset=UTF-8");
                 params.put("Authorization", "Token "+auth_token);
                 return params;
             }
 
+
+
         };
-        queue.add(postRequest);
+
+        MySingleton1.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
+
+
+
+
 
     }
+
+
+
+
+
+
+//    private void getData(){
+//
+//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+//
+//        String order_url = "https://www.hungermela.com/api/v1/order/";
+//
+//        StringRequest postRequest = new StringRequest(Request.Method.GET, order_url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // response
+//                        Log.d("Response", response);
+//
+//                        try {
+//                            JSONArray jsonArray = new JSONArray(response);
+//                            for(int i = (jsonArray.length()-1); i > (jsonArray.length()-2); i--){
+//
+//                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//
+//                                success_order_id = jsonObject.getString("id");
+//                                success_address = jsonObject.getString("complete_address");
+//                                success_res = jsonObject.getString("restaurant");
+//                                success_price = jsonObject.getString("total");
+//                                user_name = jsonObject.getString("user_name");
+//
+//
+//
+//                                String order_id_new = getString(R.string.order_id,success_order_id);
+//                                order_id.setText(order_id_new);
+//
+//                                String subtitle_new = getString(R.string.success_subtitle,success_price);
+//                                success_subtitle.setText(subtitle_new);
+//
+//                                res_name.setText(success_res);
+//
+//                                home_name.setText(success_address);
+//
+//                                String price_new = getString(R.string.price,success_price);
+//                                price_item_tot.setText(price_new);
+//
+//
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // error
+//                        Log.d("Error.Response", error.toString());
+//                    }
+//                }
+//        ) {
+//
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+////                        params.put("Content-Type", "application/json; charset=UTF-8");
+//                params.put("Authorization", "Token "+auth_token);
+//                return params;
+//            }
+//
+//        };
+//        queue.add(postRequest);
+//
+//    }
 
     @Override
     public void onBackPressed() {

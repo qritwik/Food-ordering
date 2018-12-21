@@ -3,6 +3,15 @@ package com.library.apple.food;
 public class Res1 {
 
 
+    public String getRes_id_c() {
+        return res_id_c;
+    }
+
+    public void setRes_id_c(String res_id_c) {
+        this.res_id_c = res_id_c;
+    }
+
+    private String res_id_c;
 
     private String res_phone_number_c;
     private String res_line_1_c;
@@ -22,7 +31,9 @@ public class Res1 {
     public Res1() {
     }
 
-    public Res1(String res_phone_number_c, String res_line_1_c, String res_city_c, String res_zip_code_c, String res_chain_c, String res_part_of_c, String res_name_c, String res_cat_c, String res_loc_c, String res_open_c, String res_close_c, String res_image_c) {
+    public Res1(String res_id_c,String res_phone_number_c, String res_line_1_c, String res_city_c, String res_zip_code_c, String res_chain_c, String res_part_of_c, String res_name_c, String res_cat_c, String res_loc_c, String res_open_c, String res_close_c, String res_image_c) {
+
+        this.res_id_c = res_id_c;
         this.res_phone_number_c = res_phone_number_c;
         this.res_line_1_c = res_line_1_c;
         this.res_city_c = res_city_c;

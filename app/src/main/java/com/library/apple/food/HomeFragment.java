@@ -163,14 +163,20 @@ public class HomeFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest jsonArrayRequest1 = new JsonArrayRequest(cate_url, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                cate_url, null, new Response.Listener<JSONObject>() {
+
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
 
-                for(int i = 0; i < response.length(); i++){
+                try {
+                    String total_cat_count = response.getString("count");
+                    JSONArray jsonArray = response.getJSONArray("results");
 
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
+                    for(int i=0; i<jsonArray.length();i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Category category = new Category();
 
                         category.setCate_id(jsonObject.getString("id"));
@@ -182,25 +188,24 @@ public class HomeFragment extends Fragment {
 
                         adapter_cat.notifyDataSetChanged();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
 
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
-
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        queue.add(jsonArrayRequest1);
-
+        queue.add(jsonObjReq);
 
 
 
@@ -209,30 +214,37 @@ public class HomeFragment extends Fragment {
 
 
 
-    private void getData() {
+    private void getData(){
 
+        JsonObjectRequest jsonObjReq12 = new JsonObjectRequest(Request.Method.GET,
+                res_url, null, new Response.Listener<JSONObject>() {
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(res_url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(final JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        final JSONObject jsonObject = response.getJSONObject(i);
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    String total_res_count = response.getString("count");
+                    JSONArray jsonArray = response.getJSONArray("results");
+
+                    for(int i = 0; i < jsonArray.length(); i++){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         final Res res = new Res();
-
                         res.setRes_id(jsonObject.getString("id"));
-
+                        res.setRes_name(jsonObject.getString("name"));
+                        res.setRes_open(jsonObject.getString("open_time"));
+                        res.setRes_close(jsonObject.getString("close_time"));
                         res.setRes_phone_number(jsonObject.getString("phone_number"));
                         res.setRes_line_1(jsonObject.getString("line_1"));
-                        res.setRes_city(jsonObject.getString("mainlocation"));
+                        res.setRes_loc(jsonObject.getString("city"));
                         res.setRes_zip_code(jsonObject.getString("zip_code"));
                         res.setRes_chain(jsonObject.getString("chain"));
+                        res.setRes_image(jsonObject.getString("image"));
+                        res.setRes_city(jsonObject.getString("mainlocation"));
                         res.setRes_part_of(jsonObject.getString("part_of"));
 
-
-
-                        res.setRes_name(jsonObject.getString("name"));
                         String cat1 = jsonObject.getString("category");
 
 
@@ -279,40 +291,19 @@ public class HomeFragment extends Fragment {
                         MySingleton1.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
 
 
-
-
-
-
-
-
-
-
-
-
-
                         //Ends here
 
 
-
-
-                        res.setRes_image(jsonObject.getString("image"));
-
-                        res.setRes_loc(jsonObject.getString("city"));
-                        res.setRes_open(jsonObject.getString("open_time"));
-                        res.setRes_close(jsonObject.getString("close_time"));
-
-
-
-
-
-
-
                         resList.add(res);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
 
                     }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
+
 
                 burger12.setVisibility(View.VISIBLE);
                 snack12.setVisibility(View.VISIBLE);
@@ -324,28 +315,37 @@ public class HomeFragment extends Fragment {
 
 
 
-                mShimmerViewContainer.stopShimmerAnimation();
                 mShimmerViewContainer.setVisibility(View.GONE);
                 adapter.notifyDataSetChanged();
+                mShimmerViewContainer.stopShimmerAnimation();
+
+
+
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", error.toString());
-                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
 
             }
         });
 
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+        jsonObjReq12.setRetryPolicy(new DefaultRetryPolicy(
                 30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
+        MySingleton1.getInstance(getActivity()).addToRequestQueue(jsonObjReq12);
+
 
     }
+
+
+
 
 
 

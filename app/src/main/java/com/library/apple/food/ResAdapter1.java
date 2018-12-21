@@ -100,6 +100,8 @@ public class ResAdapter1 extends RecyclerView.Adapter<ResAdapter1.MyViewHolder> 
             Res1 res = this.list.get(pos);
 
             Intent intent = new Intent(this.context,ScrollingActivity.class);
+            intent.putExtra("res_id",res.getRes_id_c());
+
             intent.putExtra("res_name",res.getRes_name_c());
             intent.putExtra("auth_token",auth_token);
             intent.putExtra("res_image",res.getRes_image_c());

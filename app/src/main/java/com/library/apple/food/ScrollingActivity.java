@@ -17,9 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -36,10 +39,11 @@ public class ScrollingActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     private List<Item> itemList;
-    private String item_url = "https://www.hungermela.com/api/v1/restaurants/";
+//    private String item_url = "https://www.hungermela.com/api/v1/restaurants/";
     String res_id;
     int flag=0;
     String auth_token;
+    String item_url;
 
     ImageView image_res;
 
@@ -81,6 +85,8 @@ public class ScrollingActivity extends AppCompatActivity {
 
         res_id = getIntent().getStringExtra("res_id");
 
+        item_url = "https://www.hungermela.com/api/v1/restaurants/"+res_id;
+
         String res_name = getIntent().getStringExtra("res_name");
 
         explore_rest_name.setText(res_name);
@@ -107,85 +113,158 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
 
-    private void getData() {
+    private void getData(){
 
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                item_url, null, new Response.Listener<JSONObject>() {
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(item_url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
+            public void onResponse(JSONObject response) {
 
+                try {
+                    JSONArray jsonArray = response.getJSONArray("items");
+                    for(int i =0; i < jsonArray.length(); i++){
 
-                        JSONArray item_array = jsonObject.getJSONArray("items");
-                        for(int j = 0; j < item_array.length(); j++){
-                            JSONObject jsonObject1 = item_array.getJSONObject(i);
-                            String items_id = jsonObject1.getString("restaurant");
-                            if(items_id.equalsIgnoreCase(res_id)){
-                                flag=1;
-                                break;
-                            }
-                        }
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Item item1 = new Item();
 
-                        if(flag==1){
+                        item1.setItem_id(jsonObject.getString("id"));
+                        item1.setItem_name(jsonObject.getString("name"));
 
-                            JSONArray item_array1 = jsonObject.getJSONArray("items");
-                            for(int j = 0; j < item_array1.length(); j++){
-                                JSONObject jsonObject2 = item_array.getJSONObject(j);
+                        item1.setItem_price(jsonObject.getString("price"));
+                        item1.setItem_veg(jsonObject.getString("veg"));
+                        item1.setItem_picture(jsonObject.getString("picture"));
+                        item1.setItem_restaurant(jsonObject.getString("restaurant"));
 
-                                Item item1 = new Item();
+                        JSONObject cusines = jsonObject.getJSONObject("cuisine");
+                        item1.setItem_cuisine_name(cusines.getString("name"));
 
-                                item1.setItem_name(jsonObject2.getString("name"));
-                                item1.setItem_id(jsonObject2.getString("id"));
-                                item1.setItem_price(jsonObject2.getString("price"));
-                                item1.setItem_veg(jsonObject2.getString("veg"));
-                                item1.setItem_picture(jsonObject2.getString("picture"));
-                                item1.setItem_restaurant(jsonObject2.getString("restaurant"));
-
-                                JSONObject cusines = jsonObject2.getJSONObject("cuisine");
-                                item1.setItem_cuisine_name(cusines.getString("name"));
-
-                                itemList.add(item1);
-
-
-                            }
-
-
-                        }
+                        itemList.add(item1);
 
 
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+
+
+
+
 
                     }
+
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
-                mShimmerViewContainer.stopShimmerAnimation();
-                mShimmerViewContainer.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", error.toString());
-
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
                 30000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
 
-        MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
+        MySingleton1.getInstance(this).addToRequestQueue(jsonObjReq);
+
+
+
 
     }
+
+
+
+//
+//    private void getData() {
+//
+//
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(item_url, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                for (int i = 0; i < response.length(); i++) {
+//                    try {
+//                        JSONObject jsonObject = response.getJSONObject(i);
+//
+//
+//                        JSONArray item_array = jsonObject.getJSONArray("items");
+//                        for(int j = 0; j < item_array.length(); j++){
+//                            JSONObject jsonObject1 = item_array.getJSONObject(i);
+//                            String items_id = jsonObject1.getString("restaurant");
+//                            if(items_id.equalsIgnoreCase(res_id)){
+//                                flag=1;
+//                                break;
+//                            }
+//                        }
+//
+//                        if(flag==1){
+//
+//                            JSONArray item_array1 = jsonObject.getJSONArray("items");
+//                            for(int j = 0; j < item_array1.length(); j++){
+//                                JSONObject jsonObject2 = item_array.getJSONObject(j);
+//
+//                                Item item1 = new Item();
+//
+//                                item1.setItem_name(jsonObject2.getString("name"));
+//                                item1.setItem_id(jsonObject2.getString("id"));
+//                                item1.setItem_price(jsonObject2.getString("price"));
+//                                item1.setItem_veg(jsonObject2.getString("veg"));
+//                                item1.setItem_picture(jsonObject2.getString("picture"));
+//                                item1.setItem_restaurant(jsonObject2.getString("restaurant"));
+//
+//                                JSONObject cusines = jsonObject2.getJSONObject("cuisine");
+//                                item1.setItem_cuisine_name(cusines.getString("name"));
+//
+//
+//
+//                            }
+//
+//
+//                        }
+//
+//
+//
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//
+//                    }
+//                }
+//
+//                mShimmerViewContainer.stopShimmerAnimation();
+//                mShimmerViewContainer.setVisibility(View.GONE);
+//                adapter.notifyDataSetChanged();
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("Volley", error.toString());
+//
+//                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//        });
+//
+//        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+//                30000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//
+//        MySingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
+//
+//    }
 }

@@ -177,7 +177,7 @@
             android:layout_toEndOf="@+id/res_image"
             android:fontFamily="@font/nunito"
             android:text="Opens at 12PM"
-            android:textColor="@android:color/holo_orange_dark"
+            android:textColor="@color/colorPrimary"
             android:textSize="10sp" />
 
     </RelativeLayout>

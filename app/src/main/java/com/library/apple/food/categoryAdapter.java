@@ -76,6 +76,8 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.MyView
 
             Intent intent = new Intent(this.context,CategoryRes.class);
             intent.putExtra("cat_id",category.getCate_id());
+            intent.putExtra("cate_name",category.getCate_name());
+            intent.putExtra("cate_img",category.getCate_picture());
             this.context.startActivity(intent);
 
         }

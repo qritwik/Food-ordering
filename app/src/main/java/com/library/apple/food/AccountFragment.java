@@ -93,7 +93,7 @@ public class AccountFragment extends Fragment {
 
         emailPhon1.setText(email);
 
-        String address = "BMSIT BOYS HOSTEL";
+        String address = "BMSIT BOYS HOSTEL, YELAHANKA";
         address1.setText(address);
 
 
@@ -144,14 +144,19 @@ public class AccountFragment extends Fragment {
 
         String order_url = "https://www.hungermela.com/api/v1/order/";
 
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(order_url, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                order_url, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(final JSONArray response) {
-                for (int i = (response.length()-1); i >= 0; i--) {
-                    try {
-                        final JSONObject jsonObject = response.getJSONObject(i);
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
 
+                try {
+                    String total_orders_count = response.getString("count");
+                    JSONArray jsonArray = response.getJSONArray("results");
+
+                    for(int i = (jsonArray.length()-1); i >= 0; i--){
+
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Order order = new Order();
 
                         order.setOrder_res_name(jsonObject.getString("restaurant"));
@@ -162,28 +167,24 @@ public class AccountFragment extends Fragment {
                         orderList.add(order);
 
 
-                        } catch (JSONException e) {
-                        e.printStackTrace();
-
                     }
+
+                    adapter12.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-
-                adapter12.notifyDataSetChanged();
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Volley", error.toString());
-                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-        })
-
-
-
-        {
+        }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -196,12 +197,77 @@ public class AccountFragment extends Fragment {
 
         };
 
+        MySingleton1.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
 
 
 
-
-        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
 
 
     }
+
+
+//    private void getData(){
+//
+//        String order_url = "https://www.hungermela.com/api/v1/order/";
+//
+//
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(order_url, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(final JSONArray response) {
+//                for (int i = (response.length()-1); i >= 0; i--) {
+//                    try {
+//                        final JSONObject jsonObject = response.getJSONObject(i);
+//
+//                        Order order = new Order();
+//
+//                        order.setOrder_res_name(jsonObject.getString("restaurant"));
+//                        order.setOrder_item_price(jsonObject.getString("total"));
+//                        order.setOrder_home_name(jsonObject.getString("complete_address"));
+//                        order.setOrder_order_id(jsonObject.getString("id"));
+//
+//                        orderList.add(order);
+//
+//
+//                        } catch (JSONException e) {
+//                        e.printStackTrace();
+//
+//                    }
+//                }
+//
+//
+//                adapter12.notifyDataSetChanged();
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("Volley", error.toString());
+//                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+//
+//            }
+//        })
+//
+//
+//
+//        {
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Authorization", "Token "+auth_token);
+//                return params;
+//            }
+//
+//
+//
+//        };
+//
+//
+//
+//
+//
+//        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
+//
+//
+//    }
 }

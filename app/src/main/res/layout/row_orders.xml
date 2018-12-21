@@ -41,7 +41,7 @@
             android:fontFamily="@font/nunito_light"
             android:gravity="right"
             android:text="@string/price"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@color/colorPrimary"
             android:textSize="14dp" />
 
     </LinearLayout>

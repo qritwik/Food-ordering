@@ -34,7 +34,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:fontFamily="@font/nunito_bold"
+            android:fontFamily="@font/nunito_black"
             android:paddingBottom="@dimen/padding_10"
             android:text="Ice Cream Shop"
             android:textColor="#212121"

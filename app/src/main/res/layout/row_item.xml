@@ -197,7 +197,7 @@
      android:layout_height="27dp"
      android:layout_alignParentRight="true"
      android:layout_centerVertical="false"
-     android:layout_marginRight="8dp"
+     android:layout_marginRight="16dp"
      android:background="@drawable/round_btn"
      android:fontFamily="@font/archivo_black"
      android:text="ADD"
