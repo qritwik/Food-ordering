@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/add_line_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="80dp"
+        android:fontFamily="@font/nunito"
+        android:text="BMSIT BOYS HOSTEL, AVALAHALLI, YELAHANKA"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/add_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/add_line_1"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="@font/nunito"
+        android:text="Ph No. 8709996580"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/add_phone_number"
+        android:background="#90a4ae"/>
+
+    <!--<RadioButton-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:id="@+id/add_selected"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:textSize="13sp" />-->
+
+
+</RelativeLayout>

@@ -62,20 +62,20 @@
             android:textSize="16dp" />
 
 
-    <TextView
-        android:id="@+id/editde8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editde7"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/nunito_light"
-        android:text="@string/address"
-        android:textColor="@android:color/darker_gray"
+        <TextView
+            android:id="@+id/editde8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editde7"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/nunito_light"
+            android:text=""
+            android:textColor="@android:color/darker_gray"
 
-        android:textSize="14dp"
-        android:textStyle="normal" />
+            android:textSize="14dp"
+            android:textStyle="normal" />
 
     <View
         android:layout_marginTop="10dp"
@@ -246,6 +246,8 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv1234"
+            android:paddingBottom="60dp"
+            android:clipToPadding="false"
             android:layout_below="@id/tcvb"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"

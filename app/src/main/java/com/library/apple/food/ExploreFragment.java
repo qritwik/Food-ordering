@@ -173,7 +173,7 @@ public class ExploreFragment extends Fragment {
                         res.setRes_phone_number(jsonObject.getString("phone_number"));
                         res.setRes_line_1(jsonObject.getString("line_1"));
                         res.setRes_loc(jsonObject.getString("city"));
-                        res.setRes_zip_code(jsonObject.getString("zip_code"));
+//                        res.setRes_zip_code(jsonObject.getString("zip_code"));
                         res.setRes_chain(jsonObject.getString("chain"));
                         res.setRes_image(jsonObject.getString("image"));
                         res.setRes_city(jsonObject.getString("mainlocation"));

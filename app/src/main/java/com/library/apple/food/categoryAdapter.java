@@ -39,7 +39,9 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.MyView
         final Category category = list.get(i);
 
         viewHolder.cate_name.setText(category.getCate_name());
-        Glide.with(context).load(category.getCate_picture()).into(viewHolder.cate_picture);
+
+        String url = "https://www.hungermela.com"+category.getCate_picture();
+        Glide.with(context).load(url).into(viewHolder.cate_picture);
 
     }
 

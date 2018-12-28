@@ -21,7 +21,7 @@ public class CartItem {
     }
 
     private String id_id;
-    private String vegnon_cart;
+    private boolean vegnon_cart;
     private String title_cart;
     private String no_cart;
     private String price_cart;
@@ -29,7 +29,7 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(String vegnon_cart, String title_cart, String no_cart, String price_cart, String cart_item_id, String id_id) {
+    public CartItem(boolean vegnon_cart, String title_cart, String no_cart, String price_cart, String cart_item_id, String id_id) {
         this.vegnon_cart = vegnon_cart;
         this.title_cart = title_cart;
         this.no_cart = no_cart;
@@ -38,11 +38,11 @@ public class CartItem {
         this.id_id = id_id;
     }
 
-    public String getVegnon_cart() {
+    public boolean getVegnon_cart() {
         return vegnon_cart;
     }
 
-    public void setVegnon_cart(String vegnon_cart) {
+    public void setVegnon_cart(boolean vegnon_cart) {
         this.vegnon_cart = vegnon_cart;
     }
 

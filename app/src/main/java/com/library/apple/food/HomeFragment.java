@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,6 +35,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -42,7 +44,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.android.volley.VolleyLog.TAG;
 
@@ -82,13 +86,105 @@ public class HomeFragment extends Fragment {
 
  //   }
 
+
+    public void getAddress(){
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken",Context.MODE_PRIVATE);
+        auth_token = sharedPreferences.getString("token","error");
+
+
+        String url_address = "https://www.hungermela.com/api/v1/address/";
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url_address,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                                if(jsonObject1.getBoolean("selected")==true){
+
+                                   String line_1 = jsonObject1.getString("line_1");
+                                   String phone_number = jsonObject1.getString("phone_number");
+
+
+
+                                   String final_address = line_1+", "+phone_number;
+
+
+                                   TextView tv_address = (TextView)myView.findViewById(R.id.tv_address);
+
+
+
+                                    tv_address.setText(final_address);
+
+
+
+
+
+
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }
+        ) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + auth_token);
+                return params;
+            }
+
+
+        };
+
+
+        queue.add(postRequest);
+
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_home,container,false);
 
+        TextView tv_address = (TextView)myView.findViewById(R.id.tv_address);
+        getAddress();
+
         mShimmerViewContainer = myView.findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmerAnimation();
+
 
         burger12 = (ImageView)myView.findViewById(R.id.leftye);
         snack12 = (ImageView)myView.findViewById(R.id.leftye1);
@@ -100,6 +196,23 @@ public class HomeFragment extends Fragment {
         snack12.setVisibility(View.GONE);
         explore_cate12.setVisibility(View.GONE);
         explore_rest12.setVisibility(View.GONE);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken",Context.MODE_PRIVATE);
+        auth_token = sharedPreferences.getString("token","error");
+
+
+        RelativeLayout relativeLayout = (RelativeLayout)myView.findViewById(R.id.rlwe);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                BottomSheetAddress bottomSheetAddress = new BottomSheetAddress();
+                bottomSheetAddress.show(getActivity().getSupportFragmentManager(),"bottomSheetAddress");
+
+            }
+        });
+
 
 
 
@@ -117,7 +230,6 @@ public class HomeFragment extends Fragment {
 //        AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        activity.setSupportActionBar(toolbar);
 
-        auth_token = getActivity().getIntent().getStringExtra("token");
 
 
 
@@ -239,7 +351,7 @@ public class HomeFragment extends Fragment {
                         res.setRes_phone_number(jsonObject.getString("phone_number"));
                         res.setRes_line_1(jsonObject.getString("line_1"));
                         res.setRes_loc(jsonObject.getString("city"));
-                        res.setRes_zip_code(jsonObject.getString("zip_code"));
+//                        res.setRes_zip_code(jsonObject.getString("zip_code"));
                         res.setRes_chain(jsonObject.getString("chain"));
                         res.setRes_image(jsonObject.getString("image"));
                         res.setRes_city(jsonObject.getString("mainlocation"));
@@ -343,6 +455,9 @@ public class HomeFragment extends Fragment {
 
 
     }
+
+
+    
 
 
 

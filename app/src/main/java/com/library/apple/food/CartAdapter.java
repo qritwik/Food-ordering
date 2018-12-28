@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,14 +36,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     private Context context;
     private List<CartItem> list;
     private String auth_token;
+    private RecyclerView recyclerView;
 
-    public CartAdapter(Context context, List<CartItem> list, String auth_token){
+    public CartAdapter(Context context, List<CartItem> list, String auth_token, RecyclerView recyclerView){
         this.context = context;
         this.list = list;
         this.auth_token = auth_token;
+        this.recyclerView = recyclerView;
 
 
     }
+
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -63,10 +70,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         viewHolder.price_cart.setText(price1);
 
 
-        String veg = item.getVegnon_cart();
-        if (veg.equalsIgnoreCase("false")) {
+
+        if (item.getVegnon_cart()==false) {
             viewHolder.vegnon_cart.setImageResource(R.drawable.non_veg);
 
+        }
+        else {
+            viewHolder.vegnon_cart.setImageResource(R.drawable.veg);
         }
 
 
@@ -91,13 +101,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                                 // response
                                 Log.d("Response", response);
 
-
+                                int count = Integer.parseInt(item.getNo_cart())+1;
+                                item.setNo_cart(String.valueOf(count));
+                                notifyDataSetChanged();
 
                                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                                Fragment myFragment = new CartFragment();
 
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
 
+
+                                CartFragment fragment = (CartFragment)activity.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                                fragment.getData1();
+
+
+
+
+
+
+//                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                                Fragment myFragment = new CartFragment();
+//
+//                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+//
 
 
 
@@ -176,13 +200,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                                     // response
                                     Log.d("Response", response);
 
+                                    list.remove(item);
+
+                                    notifyItemRemoved(i);
+
+                                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
 
-                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                                Fragment myFragment = new CartFragment();
+                                    CartFragment fragment = (CartFragment)activity.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                                    fragment.getData1();
 
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
 
+
+//                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                                Fragment myFragment = new CartFragment();
+//
+//                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+//
 
 
 
@@ -247,15 +281,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                                     // response
                                     Log.d("Response", response);
 
-                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                                Fragment myFragment = new CartFragment();
+                                    int count = Integer.parseInt(item.getNo_cart())-1;
+                                    item.setNo_cart(String.valueOf(count));
 
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+                                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
 
-
+                                    CartFragment fragment = (CartFragment)activity.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                                    fragment.getData1();
 
                                     notifyDataSetChanged();
+
+
+
+
 
                                 }
                             },
@@ -323,7 +362,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         TextView title_cart, no_cart, price_cart;
         ImageView vegnon_cart;
-        TextView btn_minus_cart, btn_plus_cart;
+        Button btn_minus_cart, btn_plus_cart;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -334,8 +373,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             price_cart = (TextView)itemView.findViewById(R.id.price_cart);
 
             //Button
-            btn_minus_cart = (TextView)itemView.findViewById(R.id.btn_minus_cart);
-            btn_plus_cart = (TextView)itemView.findViewById(R.id.btn_plus_cart);
+            btn_minus_cart = (Button) itemView.findViewById(R.id.btn_minus_cart);
+            btn_plus_cart = (Button) itemView.findViewById(R.id.btn_plus_cart);
         }
 
         @Override

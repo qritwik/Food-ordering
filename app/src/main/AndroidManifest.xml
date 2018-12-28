@@ -13,12 +13,10 @@
         android:allowBackup="true"
         android:icon="@drawable/orange"
         android:label="Hunger Mela"
-        android:roundIcon="@drawable/orange"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".login"
-            android:theme="@style/login">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +36,15 @@
         <activity android:name=".fianl" />
         <activity android:name=".success" />
         <activity android:name=".orderSummary" />
-        <activity android:name=".CategoryRes"></activity>
+        <activity android:name=".CategoryRes" />
+        <activity android:name=".loader" />
+        <activity android:name=".Address" />
+        <activity android:name=".ChooseAddress" />
+        <activity
+            android:name=".login"
+            android:theme="@style/login" />
+        <activity android:name=".Register" />
+        <activity android:name=".AddAddress"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -52,7 +53,20 @@ public class login extends AppCompatActivity {
         et_email = (EditText)findViewById(R.id.input_email);
         et_password = (EditText)findViewById(R.id.input_password);
 
+        TextView link_signup = (TextView)findViewById(R.id.link_signup);
+        link_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(login.this,Register.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         btn_login = (Button)findViewById(R.id.btn_login);
+
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override

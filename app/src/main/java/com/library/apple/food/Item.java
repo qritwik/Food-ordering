@@ -5,7 +5,7 @@ public class Item {
     private String item_name;
     private String item_cuisine_name;
     private String item_price;
-    private String item_veg;
+    private boolean item_veg;
     private String item_picture;
     private String item_id;
     private String item_restaurant;
@@ -13,7 +13,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String item_name, String item_cuisine_name, String item_price, String item_veg, String item_picture, String item_id, String item_restaurant) {
+    public Item(String item_name, String item_cuisine_name, String item_price, boolean item_veg, String item_picture, String item_id, String item_restaurant) {
         this.item_name = item_name;
         this.item_cuisine_name = item_cuisine_name;
         this.item_price = item_price;
@@ -47,11 +47,11 @@ public class Item {
         this.item_price = item_price;
     }
 
-    public String getItem_veg() {
+    public boolean getItem_veg() {
         return item_veg;
     }
 
-    public void setItem_veg(String item_veg) {
+    public void setItem_veg(boolean item_veg) {
         this.item_veg = item_veg;
     }
 

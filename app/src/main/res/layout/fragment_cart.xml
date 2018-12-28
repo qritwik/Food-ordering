@@ -7,7 +7,6 @@
 
 
 
-
     <TextView
         android:id="@+id/cart_res_name"
         android:layout_width="wrap_content"
@@ -41,50 +40,77 @@
         android:background="#ffffff"
 
         android:id="@+id/rv_cart"
-        android:layout_above="@id/line5"
 
         android:layout_width="match_parent"
         android:layout_below="@id/line1"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 
 
 
     <View
-
-        android:layout_marginTop="5dp"
-        android:id="@+id/line5"
+        android:id="@+id/line12"
         android:layout_width="match_parent"
         android:layout_height="0.4dp"
-
-        android:layout_above="@id/rl1"
+        android:layout_above="@id/tv1"
         android:background="#90a4ae"/>
 
 
 
-    <RelativeLayout
 
-        android:layout_alignParentBottom="true"
-        android:background="#ffffff"
-        android:id="@+id/rl1"
-        android:layout_width="match_parent"
-        android:layout_height="158dp">
+        <TextView
+
+            android:layout_marginTop="6dp"
+            android:id="@+id/tv1"
+            android:textColor="#2d2d2d"
+            android:layout_above="@id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="DELIVER TO" />
+
+        <TextView
+
+            android:layout_marginBottom="6dp"
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_above="@id/line11"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/nunito"
+            android:text="BMSIT BOYS HOSTEL, AVALAHALLI, YELAHANKA, 560064"
+            android:textSize="12sp" />
+
+
+        <View
+            android:layout_above="@+id/ll_order"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:id="@+id/line11"
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:background="#bdbdbd"/>
+
 
         <LinearLayout
 
             android:id="@+id/ll_order"
             android:layout_above="@id/ll3"
             android:layout_width="match_parent"
+            android:gravity="bottom"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textAllCaps="true"
                     android:textSize="13dp"
                     android:id="@+id/et_coupon"
                     android:layout_width="wrap_content"
@@ -96,8 +122,6 @@
                     android:hint="Apply Coupon"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                     android:textColor="#616161" />
-
-
 
                 <TextView
                     android:gravity="right"
@@ -118,7 +142,6 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="1dp"
                 android:id="@+id/line8"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
@@ -169,11 +192,9 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="1dp"
                 android:id="@+id/line4"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
-                android:layout_above="@id/rl1"
                 android:background="#cfd8dc"/>
 
             <LinearLayout
@@ -216,14 +237,15 @@
             <View
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
-                android:layout_marginTop="1dp"
                 android:id="@+id/line67"
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
-                android:layout_above="@id/rl1"
                 android:background="#cfd8dc"/>
 
             <LinearLayout
+                android:layout_marginBottom="6dp"
+                android:layout_gravity="bottom"
+                android:id="@+id/lll123"
                 android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -265,6 +287,8 @@
 
         </LinearLayout>
 
+
+
      <LinearLayout
          android:id="@+id/ll3"
          android:layout_alignParentBottom="true"
@@ -278,7 +302,7 @@
              android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:layout_weight="1"
-             android:background="#eceff1"
+             android:background="#f5f5f5"
              android:fontFamily="@font/nunito_black"
              android:text="REMOVE"
              android:textColor="#263238" />
@@ -290,13 +314,13 @@
              android:layout_weight="1"
              android:background="@color/colorPrimary"
              android:fontFamily="@font/nunito_black"
-             android:text=""
+             android:text= ""
              android:textColor="#ccffffff" />
 
      </LinearLayout>
 
-    </RelativeLayout>
-
 </RelativeLayout>
+
+
 
 

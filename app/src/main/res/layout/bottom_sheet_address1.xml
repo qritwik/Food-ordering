@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:src="@drawable/map"
+        android:id="@+id/leftye"
+        android:layout_below="@id/line1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"/>
+
+
+    <TextView
+
+        android:id="@+id/explore_cate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_marginBottom="16dp"
+
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/leftye"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Saved Address"
+        android:textColor="#2d2d2d"
+        android:textSize="20dp"></TextView>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/explore_cate"
+        android:id="@+id/rv_address1"
+        android:layout_width="match_parent"
+        android:paddingBottom="25dp"
+        android:clipToPadding="false"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

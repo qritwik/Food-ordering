@@ -9,7 +9,7 @@
     android:layout_height="180dp">
 
     <RelativeLayout
-        android:background="#fafafa"
+
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -37,7 +37,7 @@
             android:fontFamily="@font/nunito_black"
             android:paddingBottom="@dimen/padding_10"
             android:text="Ice Cream Shop"
-            android:textColor="#212121"
+            android:textColor="#2d2d2d"
             android:textSize="16sp" />
 
     </RelativeLayout>

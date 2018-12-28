@@ -49,7 +49,15 @@ public class ResAdapter1 extends RecyclerView.Adapter<ResAdapter1.MyViewHolder> 
         viewHolder.res_open.setText(open_at);
 //        viewHolder.res_close.setText(res.getRes_close());
 
-        Glide.with(context).load(res.getRes_image_c()).into(viewHolder.res_image);
+        if(res.getRes_image_c()==""){
+
+            viewHolder.res_image.setImageResource(R.drawable.imgplace);
+        }
+        else{
+            Glide.with(context).load(res.getRes_image_c()).into(viewHolder.res_image);
+
+
+        }
 
 
     }

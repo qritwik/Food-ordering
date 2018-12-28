@@ -75,9 +75,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
         viewHolder.item_price.setText(price1);
 
-        String veg = item.getItem_veg();
-        if (veg.equalsIgnoreCase("false")) {
+
+        if (item.getItem_veg()==false) {
             viewHolder.item_veg.setImageResource(R.drawable.non_veg);
+        }
+        else {
+            viewHolder.item_veg.setImageResource(R.drawable.veg);
         }
 
 
@@ -133,20 +136,35 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 queue.add(postRequest);
 
 
-                final Snackbar snackBar = Snackbar.make(view,item.getItem_name()+" added to cart" , Snackbar.LENGTH_INDEFINITE);
+                final Snackbar snackBar = Snackbar.make(view,item.getItem_name(), Snackbar.LENGTH_INDEFINITE);
                 View sbView = snackBar.getView();
-                sbView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                sbView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
 
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-                textView.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+                textView.setTextColor(ContextCompat.getColor(context,R.color.white));
+
+                snackBar.setActionTextColor(Color.WHITE);
+
+                TextView snackbarActionTextView = (TextView) snackBar.getView().findViewById( android.support.design.R.id.snackbar_action );
+                snackbarActionTextView.setTextSize( 15 );
+                snackbarActionTextView.setTypeface(snackbarActionTextView.getTypeface(), Typeface.BOLD);
+
+                TextView snackbarTextView = (TextView) snackBar.getView().findViewById(android.support.design.R.id.snackbar_text);
+                snackbarTextView.setTextSize( 14 );
+                snackbarTextView.setTypeface(snackbarActionTextView.getTypeface(), Typeface.BOLD);
 
                 snackBar.setAction("CART", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(
-                                context,
-                                "snackbar OK clicked",
-                                Toast.LENGTH_LONG).show();
+
+
+                                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                                Fragment myFragment = new CartFragment();
+
+                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+
+
+
                     }
                 });
 

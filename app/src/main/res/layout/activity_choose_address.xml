@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Address">
+
+    <ImageView
+        android:src="@drawable/map"
+        android:id="@+id/img_map"
+        android:layout_below="@id/rv_home_cate"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:layout_toRightOf="@id/img_map"
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rv_home_cate"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito_black"
+        android:text="Choose address to deliver"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"></TextView>
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:layout_below="@id/tv_address"
+        android:background="#90a4ae"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/line1"
+        android:id="@+id/rv_choose_address"
+        android:layout_above="@id/rl_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:background="#f5f5f5"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rl_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv1"
+            android:textColor="#2d2d2d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/nunito_black"
+            android:text="DELIVER TO" />
+
+        <TextView
+            android:id="@+id/tv2123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv1"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/nunito"
+            android:text="BMSIT BOYS HOSTEL, AVALAHALLI, YELAHANKA, 560064, 8709996580"
+            android:textSize="12sp" />
+
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_address_btn"
+        android:layout_width="wrap_content"
+        android:src="@drawable/add_address"
+        android:layout_margin="16dp"
+        android:layout_above="@id/rl_proceed"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

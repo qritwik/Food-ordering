@@ -20,11 +20,14 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +59,94 @@ public class AccountFragment extends Fragment {
 
     String auth_token;
 
+    public void getAddress(){
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken",Context.MODE_PRIVATE);
+        auth_token = sharedPreferences.getString("token","error");
+
+
+        String url_address = "https://www.hungermela.com/api/v1/address/";
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url_address,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                                if(jsonObject1.getBoolean("selected")==true){
+
+                                    String line_1 = jsonObject1.getString("line_1");
+                                    String phone_number = jsonObject1.getString("phone_number");
+
+
+
+                                    String final_address = line_1+", "+phone_number;
+
+
+                                    TextView address1 = (TextView)myView.findViewById(R.id.editde8);
+
+
+
+                                    address1.setText(final_address);
+
+
+
+
+
+
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }
+        ) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + auth_token);
+                return params;
+            }
+
+
+        };
+
+
+        queue.add(postRequest);
+
+
+    }
+
+
 
     @Nullable
     @Override
@@ -78,23 +169,26 @@ public class AccountFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
 
+        getAddress();
+
 
 
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken",Context.MODE_PRIVATE);
         auth_token = sharedPreferences.getString("token","error");
 
-        String first_name = sharedPreferences.getString("first_name","First Name");
-        String last_name = sharedPreferences.getString("last_name","Last Name");
+//        String first_name = sharedPreferences.getString("first_name","First Name");
+//        String last_name = sharedPreferences.getString("last_name","Last Name");
         String email = sharedPreferences.getString("email","Email");
 
-        String name2 = first_name+" "+last_name;
-        name1.setText(name2);
+        String name12 = sharedPreferences.getString("name","Hunger Mela");
+
+
+        name1.setText(name12);
 
         emailPhon1.setText(email);
 
-        String address = "BMSIT BOYS HOSTEL, YELAHANKA";
-        address1.setText(address);
+
 
 
 

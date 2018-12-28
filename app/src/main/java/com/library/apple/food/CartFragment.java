@@ -66,11 +66,107 @@ public class CartFragment extends Fragment {
 
     View myView;
 
+    String final_price;
+
+
+
+
+    public void getAddress(){
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginToken",Context.MODE_PRIVATE);
+        auth_token = sharedPreferences.getString("token","error");
+
+
+        String url_address = "https://www.hungermela.com/api/v1/address/";
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url_address,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                                if(jsonObject1.getBoolean("selected")==true){
+
+                                    String line_1 = jsonObject1.getString("line_1");
+                                    String phone_number = jsonObject1.getString("phone_number");
+
+
+
+                                    String final_address = line_1+", "+phone_number;
+
+                                    TextView complete_address = (TextView)myView.findViewById(R.id.tv2);
+
+
+
+
+
+
+                                    complete_address.setText(final_address);
+
+
+
+
+
+
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                }
+        ) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + auth_token);
+                return params;
+            }
+
+
+        };
+
+
+        queue.add(postRequest);
+
+
+    }
+
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_cart,container,false);
+
+        getAddress();
 
 
 
@@ -87,6 +183,15 @@ public class CartFragment extends Fragment {
 
         btn_empty = (Button)myView.findViewById(R.id.btn_empty);
 
+        TextView address11112 = (TextView)myView.findViewById(R.id.editde7);
+        address11112.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),Address.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         btn_proceed = (Button)myView.findViewById(R.id.btn_proceed);
@@ -98,19 +203,46 @@ public class CartFragment extends Fragment {
         cartList = new ArrayList<>();
 
         recyclerView = (RecyclerView)myView.findViewById(R.id.rv_cart);
-        adapter = new CartAdapter(getActivity(),cartList,auth_token);
+        adapter = new CartAdapter(getActivity(),cartList,auth_token,recyclerView);
         recyclerView.setAdapter(adapter);
 
         btn_proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String coup = et_coupon.getText().toString().trim();
-                checkOut(coup);
-
 //
+//                if(Integer.parseInt(final_price)<100){
+//
+//                    Toast.makeText(getActivity(),"Minimum order value must be more than Rs 100",Toast.LENGTH_LONG).show();
+//                }
+
+//                else{
+
+
+
+
+//                }
+
+                checkOut(et_coupon.getText().toString().trim());
+
+
+
+
             }
         });
+
+
+//        TextView tv1 = (TextView)myView.findViewById(R.id.tv1);
+////        tv1.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////
+////                BottomSheetAddress1 bottomSheetAddress = new BottomSheetAddress1();
+////                bottomSheetAddress.show(getActivity().getSupportFragmentManager(),"bottomSheetAddress");
+////
+////
+////
+////            }
+////        });
 
 
 
@@ -209,67 +341,6 @@ public class CartFragment extends Fragment {
 
 
 
-    private void checkOut(final String coupoun){
-
-        String checkout_url = "https://www.hungermela.com/api/v1/checkout/";
-
-        RequestQueue queue2 = Volley.newRequestQueue(getActivity());
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, checkout_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
-                        try {
-                            JSONObject js = new JSONObject(response);
-
-                            Intent intent = new Intent(getActivity(),success.class);
-                            startActivity(intent);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }
-        ) {
-
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-//                        params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", "Token "+auth_token);
-                return params;
-            }
-
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("code", coupoun);
-                return params;
-            }
-        };
-        queue2.add(postRequest);
-
-
-
-    }
-
-
-
-
 
 
 
@@ -303,7 +374,7 @@ public class CartFragment extends Fragment {
                             String discount_price1 = getActivity().getString(R.string.dis_price,discount_price);
                             cart_tot_discount.setText(discount_price1);
 
-                            String final_price = js.getString("final_price");
+                            final_price = js.getString("final_price");
                             String final_price1 = getActivity().getString(R.string.proceed_to_pay,final_price);
                             btn_proceed.setText(final_price1);
 
@@ -312,6 +383,9 @@ public class CartFragment extends Fragment {
 
                             String sub_title = getActivity().getString(R.string.price1,name,final_price);
                             cart_item_price.setText(sub_title);
+
+
+
 
 
 
@@ -360,7 +434,7 @@ public class CartFragment extends Fragment {
     }
 
 
-    private void getData1(){
+    public void getData1(){
 
         RequestQueue queue1 = Volley.newRequestQueue(getActivity());
 
@@ -372,13 +446,14 @@ public class CartFragment extends Fragment {
                 try {
                     String price_item_tot = response.getString("total_cart");
                     String del_charge  = response.getString("delivery_charge");
-                    String final_price = response.getString("final_price");
+                    final_price = response.getString("final_price");
 
                     String price_item_tot1 = getActivity().getString(R.string.price,price_item_tot);
                     cart_tot_price.setText(price_item_tot1);
 
                     String del_charge1 = getActivity().getString(R.string.price,del_charge);
                     cart_del_price.setText(del_charge1);
+
 
                     String final_price1 = getActivity().getString(R.string.proceed_to_pay,final_price);
                     btn_proceed.setText(final_price1);
@@ -512,7 +587,7 @@ public class CartFragment extends Fragment {
 
                         cartItem.setCart_item_id(item.getString("id"));
 
-                       cartItem.setVegnon_cart(item.getString("veg"));
+                       cartItem.setVegnon_cart(item.getBoolean("veg"));
                        cartItem.setTitle_cart(item.getString("name"));
                        cartItem.setNo_cart(jsonObject.getString("quantity"));
                        cartItem.setPrice_cart(jsonObject.getString("price"));
@@ -564,6 +639,67 @@ public class CartFragment extends Fragment {
 
 
     }
+
+
+    private void checkOut(final String coupoun){
+
+        String checkout_url = "https://www.hungermela.com/api/v1/checkout/";
+
+        RequestQueue queue2 = Volley.newRequestQueue(getActivity());
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, checkout_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                        try {
+                            JSONObject js = new JSONObject(response);
+
+                            Intent intent = new Intent(getActivity(),success.class);
+                            startActivity(intent);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.toString());
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+//                        params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", "Token "+auth_token);
+                return params;
+            }
+
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("code", coupoun);
+                return params;
+            }
+        };
+        queue2.add(postRequest);
+
+
+
+    }
+
+
 
 
 }

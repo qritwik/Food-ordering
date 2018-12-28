@@ -1,7 +1,9 @@
 package com.library.apple.food;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -58,17 +60,31 @@ public class ScrollingActivity extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab_cart1);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        final FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab_cart1);
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("RestrictedApi")
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//
+//
+//                                Fragment myFragment = new CartFragment();
+//
+//
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).commit();
+//                floatingActionButton.setVisibility(View.GONE);
+//
+//
+//
+//
+//
+//
+//            }
+//        });
 
-
-
-            }
-        });
-
-//        image_res = (ImageView)findViewById(R.id.image_res1);
+        image_res = (ImageView)findViewById(R.id.leftye1);
 
 
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container123);
@@ -90,8 +106,8 @@ public class ScrollingActivity extends AppCompatActivity {
         String res_name = getIntent().getStringExtra("res_name");
 
         explore_rest_name.setText(res_name);
-//        String res_image = getIntent().getStringExtra("res_image");
-//        Glide.with(getApplicationContext()).load(res_image).into(image_res);
+        String res_image = getIntent().getStringExtra("res_image");
+        Glide.with(getApplicationContext()).load(res_image).into(image_res);
 
 
         itemList = new ArrayList<>();
@@ -132,7 +148,7 @@ public class ScrollingActivity extends AppCompatActivity {
                         item1.setItem_name(jsonObject.getString("name"));
 
                         item1.setItem_price(jsonObject.getString("price"));
-                        item1.setItem_veg(jsonObject.getString("veg"));
+                        item1.setItem_veg(jsonObject.getBoolean("veg"));
                         item1.setItem_picture(jsonObject.getString("picture"));
                         item1.setItem_restaurant(jsonObject.getString("restaurant"));
 
@@ -184,9 +200,13 @@ public class ScrollingActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//        startActivity(intent);
+//    }
 
-
-//
+    //
 //    private void getData() {
 //
 //

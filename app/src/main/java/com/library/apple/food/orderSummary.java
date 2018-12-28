@@ -47,10 +47,5 @@ public class orderSummary extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
 
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(intent);
-    }
 }

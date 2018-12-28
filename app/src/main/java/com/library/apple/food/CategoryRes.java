@@ -124,7 +124,7 @@ public class CategoryRes extends AppCompatActivity {
                         res.setRes_phone_number_c(jsonObject.getString("phone_number"));
                         res.setRes_line_1_c(jsonObject.getString("line_1"));
                         res.setRes_loc_c(jsonObject.getString("city"));
-                        res.setRes_zip_code_c(jsonObject.getString("zip_code"));
+//                        res.setRes_zip_code_c(jsonObject.getString("zip_code"));
                         res.setRes_chain_c(jsonObject.getString("chain"));
                         res.setRes_image_c(jsonObject.getString("image"));
                         res.setRes_city_c(jsonObject.getString("mainlocation"));

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAddress">
+
+    <ImageView
+        android:id="@+id/leftye"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/line1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/map" />
+
+
+    <TextView
+        android:id="@+id/tv_add_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/leftye"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Add New Addresss"
+        android:textColor="#2d2d2d"
+        android:textSize="20dp"></TextView>
+
+    <EditText
+        android:id="@+id/add_line11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="83dp"
+        android:ems="10"
+        android:fontFamily="@font/nunito_semibold"
+        android:inputType="textPersonName"
+        android:hint="Address line 1"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/add_phone_number11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/add_line11"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:fontFamily="@font/nunito_semibold"
+        android:inputType="phone"
+        android:hint="Phone Number"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/choose_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_phone_number11"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="26dp"
+
+        android:fontFamily="@font/nunito_bold"
+        android:text="Choose Address"
+        android:textColor="#2d2d2d"
+        android:textSize="20dp"></TextView>
+
+    <RadioGroup
+        android:layout_marginLeft="16dp"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choose_address"
+        android:layout_marginTop="10dp"
+        android:weightSum="1"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biratnagar"
+            android:id="@+id/radioButton1"
+
+            android:checked="false"
+            android:textSize="15dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dharan"
+            android:id="@+id/radioButton2"
+
+            android:checked="false"
+            android:textSize="15dp"
+            android:layout_weight="0.13" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Itahari"
+            android:id="@+id/radioButton3"
+
+            android:checked="false"
+            android:textSize="15dp"
+            android:layout_weight="0.13" />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btn_create_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/nunito_black"
+        android:text="create address"
+        android:textColor="#ccffffff" />
+
+</RelativeLayout>
